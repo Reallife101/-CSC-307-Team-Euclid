@@ -11,3 +11,5 @@ Nate Ball
 Casey Koiwai
 
 Jimmy Liu
+
+![alt text](https://github.com/Reallife101/CSC-307-Team-Euclid/blob/master/System%20Architecture.png "System Architecture")
