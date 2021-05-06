@@ -1,0 +1,58 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+
+	  <title>PolyCards</title>
+	  <meta name="description" content="PolyCards">
+	  <meta name="author" content="Team Euclid">
+
+	  <link rel="stylesheet" href="Style Sheets/style.css">
+
+	</head>
+
+	<body>
+		<!-- Side Navigation Bar -->
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="news.asp">Search</a></li>
+			<li><a href="news.asp">Study</a></li>
+			<li><a class="active" href="contact.html">Contact</a></li>
+			<li><a href="aboutus.html">About</a></li>
+		</ul>
+
+		<!--- Hero Image Stuff --->
+	  	<div class="hero-image">
+			<div class="hero-text">
+				<h1>Contact Us</h1>
+				<p>Team Euclid</p>
+			</div>
+		</div>
+
+		<div class="contact_container">
+			<form action="action_page.php">
+
+			<label for="fname">First Name</label>
+			<input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+			<label for="lname">Last Name</label>
+			<input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+			<label for="country">Country</label>
+			<select id="country" name="country">
+				<option value="australia">Australia</option>
+				<option value="canada">Canada</option>
+				<option value="usa">USA</option>
+			</select>
+
+			<label for="subject">Subject</label>
+			<textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+			<input type="submit" value="Submit">
+
+			</form>
+		</div>
+	  
+	</body>
+</html>
