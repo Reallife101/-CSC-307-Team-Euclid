@@ -3,6 +3,7 @@ body, html {
     box-sizing: border-box;
 }
 
+
 /* The hero image */
 .hero-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
@@ -28,6 +29,18 @@ body, html {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+}
+
+.button2 {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #4CAF50;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
 }
 
 
@@ -271,4 +284,15 @@ input[type=submit]:hover {
   width:100%; 
   height: 600px; 
   object-fit: cover;
+}
+
+.right_col {
+  left: 10%;
+  width: 90%;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
 }
