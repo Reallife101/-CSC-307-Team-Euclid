@@ -22,15 +22,26 @@
 			  	<li><a href="contact.html">Contact</a></li>
 			  	<li><a href="aboutus.html">About</a></li>
 			</ul>
-	  
+		
 	  	<!--- Hero Image Stuff --->
+		<script type="module" src="editor.js"></script>
 	  	<div class="hero-image">
 			<div class="hero-text">
 				<h1>Create Study Set</h1>
-				<p>Make Flashcards</p>
+				<input id="frontText" placeholder="Front of Flashcard">
+				<br>
+				<input id="backText" placeholder="Back of Flashcard">
+				<br>
+				<button id="previousCard">Previous Card</button>
+				<button id="nextCard">Next Card</button>
+				<br>
+				<button id="deleteCard">Delete Card</button>
+				<button id="createNewSet">Create New Set</button>
+				<button id="saveSet">Save Card Set</button>
+				<ol id="cardButtonList">
+				</ol>
 			</div>
 		</div>
-
-
+		
 	</body>
 </html>
