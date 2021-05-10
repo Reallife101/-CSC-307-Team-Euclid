@@ -296,3 +296,27 @@ input[type=submit]:hover {
   position: relative;
 
 }
+
+.column_index {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row_index:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.padpadpad{
+  padding: 5% 10%;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
