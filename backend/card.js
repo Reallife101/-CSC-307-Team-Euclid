@@ -41,7 +41,8 @@ let CardSet = {
         if (lastCard.front == "" || lastCard.back == "")
             this.removeCard(this.cards.length - 1);
         var jsonOutput = JSON.stringify(this) + JSON.stringify(this.cards);
-        this.addCard(lastCard);
+        if (lastCard.front == "" || lastCard.back == "")
+            this.addCard(lastCard);
         console.log(jsonOutput);
     }
 }
