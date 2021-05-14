@@ -1,71 +1,50 @@
-$(document).ready(function() {
 
-    var flipped;
-    var cur = 0;
-    var qbank = new Array;
-    var frontColor = "#f5a742";
-    var backColor = "#428af5";
+let Card = {
+    front : "",
+    back : "",
+    setFront(newFront) {this.front = String(newFront)},
+    setBack(newBack) {this.back = String(newBack)},
+    getFront() {return this.front},
+    getBack() {return this.back}
+}
 
-    loadDB();
-
-    function loadDB() {
-        $.getJSON("set1.json", function(data) {
-            for (i = 0; i < data.questionlist.length; i++) {
-                qbank[i] = [];
-                qbank[i][0] = data.questionlist[i].cardfront;
-                qbank[i][1] = data.questionlist[i].cardback;
-            }
-            beginActivity();
-        })
+let CardSet = {
+    cards : [],
+    id : null,
+    author : null,
+    password : null,
+    //Compares the hash of a passed value to stored hashed password
+    checkPassword(checkPass) {
+        if (this.password == passHash(checkPass))
+            return true;
+        return false;
+    },
+    //Sets the password for the set, only to be used on creation of card set
+    setPassword(newPass){this.password = passHash(newPass)},
+    //Hash function that returns a hash of input string; needs to be added
+    passHash(newPass) {return newPass},
+    //Appends a card to the cards list
+    addCard(newCard) {this.cards.push(newCard)},
+    //Removes card at index
+    removeCard(index) {this.cards.splice(index, 1)},
+    //Returns a card by index
+    getCard(index) {return this.cards[index]},
+    //Returns a shuffled list of cards for testing
+    shuffleCards() {return this.cards.sort(() => Math.random() - 0.5)},
+    printCards() {
+        for (var i = 0; i < this.cards.length; i++) {
+            console.log(this.getCard(i).front + ": " + this.getCard(i).back)
+        }
+    },
+    saveSet(){
+        var lastCard = this.cards[this.cards.length - 1];
+        if (lastCard.front == "" || lastCard.back == "")
+            this.removeCard(this.cards.length - 1);
+        var jsonOutput = JSON.stringify(this) + JSON.stringify(this.cards);
+        if (lastCard.front == "" || lastCard.back == "")
+            this.addCard(lastCard);
+        console.log(jsonOutput);
     }
+}
 
-    function beginActivity() {
-        flipped = 0;
-        $("#cardArea").empty();
-        $("#cardArea").append('<div id="card1" class="card">' + qbank[cur][0] + '</div>');
-        $("#cardArea").append('<div id="card2" class="card">' + qbank[cur][1] + '</div>');
-        $("#card1").css("background-color", frontColor);
-        $("#card2").css("background-color", backColor);
-        $("#card2").css("top", "200px");
-        $("#cardArea").on("click", function() {
-            if (flipped != 1) {
-                flipped = 1;
-                $("#card1").animate({
-                    top: "-=200"
-                }, 150, function() {
-                    flipped = 0;
-                    if ($("#card1").position().top == -200) {
-                        $("#card1").css("top", "200px");
-                    }
-                });
-                $("#card2").animate({
-                    top: "-=200"
-                }, 150, function() {
-                    if ($("#card2").position().top == -200) {
-                        $("#card2").css("top", "200px");
-                    }
-                });
-            }
-        });
-        cur++;
-        $("#buttonArea").empty();
-        $("#buttonArea").append('<div id="prevButton">PREV</div>');
-        $("#buttonArea").append('<div id="nextButton">NEXT</div>');
-        $("#nextButton").on("click", function() {
-            if (cur < qbank.length) {
-                beginActivity();
-            } else {
-                $("#buttonArea").empty();
-                $("#cardArea").empty();
-                $("#cardArea").append('<div id="finalMessage">You have finished the activity.</div>');
-            }
-        });
-        $("#prevButton").on("click", function() {
-            if (cur > 1) {
-                cur -= 2;
-                beginActivity();
-            }
-        });
-    }
-
-});
+export { Card, CardSet }
