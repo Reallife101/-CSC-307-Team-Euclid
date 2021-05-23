@@ -1,0 +1,55 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+
+	  <title>PolyCards</title>
+	  <meta name="description" content="PolyCards">
+	  <meta name="author" content="Team Euclid">
+
+	  <link rel="stylesheet" href="../style_sheets/style.css">
+
+	</head>
+
+	<body>
+		<!-- Side Navigation Bar -->
+			<ul>
+			  	<li><a href="../index.html">Home</a></li>
+			  	<li><a href="../search/search.html">Search</a></li>
+			  	<li><a href="../study/study.html">Study</a></li>
+			  	<li><a class="active" href="create.html">Create</a></li>
+			  	<li><a href="../contact/contact.html">Contact</a></li>
+			  	<li><a href="../about/aboutus.html">About</a></li>
+			</ul>
+		
+	  	<!--- Hero Image Stuff --->
+		<script type="module" src="create.js"></script>
+	  	<div class="hero-image">
+			<div class="hero-text">
+				<h1>Create Study Set</h1>
+			</div>
+		</div>
+
+		<div class="contact_container">
+			<input type="text" id="frontText" class="text_box1" placeholder="Front of Flashcard", style="text-align: center">
+				<br>
+				<input type="text" id="backText" class="text_box1" placeholder="Back of Flashcard">
+				<br>
+				<div align="center">
+					<button class="button3" id="previousCard">Previous Card</button>
+					<button class="button3" id="nextCard">Next Card</button>
+					<br>
+					<br>
+					<button class="button3" id="deleteCard">Delete Card</button>
+					<button class="button3" id="saveSet">Save Card Set</button>
+					<br>
+					<ol class="button3" id="cardButtonList">
+					</ol>
+				</div>
+
+			</form>
+		</div>
+		
+	</body>
+</html>
