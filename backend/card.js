@@ -14,11 +14,7 @@ let CardSet = {
     author : null,
     password : null,
     //Compares the hash of a passed value to stored hashed password
-    checkPassword(checkPass) {
-        if (this.password == passHash(checkPass))
-            return true;
-        return false;
-    },
+    checkPassword(checkPass) {return this.password == passHash(checkPass)},
     //Sets the password for the set, only to be used on creation of card set
     setPassword(newPass){this.password = passHash(newPass)},
     //Hash function that returns a hash of input string; needs to be added
