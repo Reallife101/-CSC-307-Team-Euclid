@@ -42,9 +42,16 @@
 					<br>
 					<br>
 					<button class="button3" id="deleteCard">Delete Card</button>
-					<button class="button3" id="saveSet" onclick="write()">Save Card Set</button>
+					<button class="button3" id="saveSet" onclick="getCard()">Save Card Set</button>
 					<br>
 					<ol class="button3" id="cardButtonList"></ol>
+					<script src="./database.js">
+						function getCard(){
+							var front = document.getElementById("frontText").value;
+							var back  = document.getElementById("backText").value;
+							console.log(front + ", " + back);
+						}
+					</script>
 				</div>
 
 			</form>

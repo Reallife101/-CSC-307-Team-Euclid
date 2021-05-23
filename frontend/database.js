@@ -2,6 +2,7 @@ const firebase = require("firebase/app") //https://www.gstatic.com/firebasejs/8.
 require("firebase/analytics")            //"https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"
 require("firebase/database")             //"https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"
 
+
 var firebaseConfig = {
     apiKey:        "AIzaSyDl0gkgD1D9usTr8ngnMr5bRVu5Ac2jbmg",
     authDomain:    "euclidean-geometry-61a34.firebaseapp.com",
@@ -37,6 +38,9 @@ function read(password, author=""){
         }
     });
 }
+
+var express = require('express')
+var app = express()
 
 // deletes set
 
