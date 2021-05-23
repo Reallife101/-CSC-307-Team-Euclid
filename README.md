@@ -13,3 +13,5 @@ Casey Koiwai
 Jimmy Liu
 
 ![alt text](https://github.com/Reallife101/CSC-307-Team-Euclid/blob/master/System%20Architecture.png "System Architecture")
+
+Style Guide: https://google.github.io/styleguide/jsguide.html
