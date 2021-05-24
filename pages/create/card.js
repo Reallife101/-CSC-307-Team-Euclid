@@ -47,4 +47,4 @@ let CardSet = {
     }
 }
 
-export { Card, CardSet }
+export { Card, CardSet };

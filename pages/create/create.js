@@ -1,4 +1,4 @@
-import {Card, CardSet} from "./card.js"
+import {Card, CardSet} from "./card.js";
 
 // All html elements that are accessed (excluding card buttons this script creates)
 var testCardSet = Object.create(CardSet);
