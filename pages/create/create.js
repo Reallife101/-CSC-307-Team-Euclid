@@ -1,5 +1,5 @@
 import {Card, CardSet} from "./card.js";
-//import "../database";
+//import "/pages/database.js";
 
 // All html elements that are accessed (excluding card buttons this script creates)
 var testCardSet = Object.create(CardSet);
@@ -11,6 +11,7 @@ document.getElementById("deleteCard").onclick = deleteCard;
 document.getElementById("nextCard").onclick = nextCard;
 document.getElementById("previousCard").onclick = previousCard;
 document.getElementById("uploadCardSet").onclick = uploadCardSet;
+document.getElementById("testJSON").onclick = testJSON;
 
 // These variables define the current state of the editor
 var currentCardSet = testCardSet;
@@ -111,4 +112,11 @@ function uploadCardSet(){
 
     currentCardSet.saveSet()
     //write(currentCardSet, currentCardSet.password);
+
+}
+
+function testJSON(){
+    var testCardSet = Object.create(CardSet);
+    testCardSet.populateFromJSON({"id":"Set 1","author":"N8","password":"123","cards":[{"front":"Hello","back":"Goodbye"},{"front":"1","back":"2"},{"front":"g","back":"h"}]});
+    console.log(testCardSet.toJSON())
 }

@@ -1,4 +1,3 @@
-
 let Card = {
     front : "",
     back : "",
@@ -40,14 +39,35 @@ let CardSet = {
         var lastCard = this.cards[this.cards.length - 1];
         if (lastCard.front == "" || lastCard.back == "")
             this.removeCard(this.cards.length - 1);
-        var jsonOutput = JSON.stringify(this);
+        var jsonOutput = this.toJSON();
         if (lastCard.front == "" || lastCard.back == "")
             this.addCard(lastCard);
         console.log(jsonOutput);
     },
-    toJson(){
-        var output = '"id":'
-        return false
+    //Returns this object as a formatted JSON string
+    toJSON(){
+        var formatOutput = '{"id":"'+String(this.id)+'","author":"'+String(this.author)+'","password":"'+String(this.password)+'","cards":[';
+        for (var i = 0 ; i < this.cards.length; i++){
+            formatOutput = formatOutput + '{"front":"'+this.cards[i].getFront()+'","back":"'+this.cards[i].getBack()+'"}';
+            if (i == this.cards.length - 1){
+                formatOutput = formatOutput + "]}";
+            }
+            else{
+                formatOutput = formatOutput + ",";
+            }
+        }
+        return formatOutput;
+    },
+    //Takes a JSON string and populates this with the
+    populateFromJSON(cardSetJSON){
+        this.id = cardSetJSON.id;
+        this.author = cardSetJSON.author;
+        for (var i = 0; i < cardSetJSON.cards.length; i++){
+            var newCard = Object.create(Card);
+            newCard.setFront(cardSetJSON.cards[i].front);
+            newCard.setBack(cardSetJSON.cards[i].back);
+            this.addCard(newCard);
+        }
     }
 }
 
