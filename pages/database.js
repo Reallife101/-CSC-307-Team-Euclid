@@ -1,3 +1,4 @@
+const { request } = require("express");
 const firebase = require("firebase/app") //https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"
 require("firebase/analytics")            //"https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"
 require("firebase/database")             //"https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"
@@ -17,27 +18,18 @@ firebase.initializeApp(firebaseConfig);
 
 // write to database
 // read to database
-function write(cardSet, password){
-    firebase.database().ref(password).set(cardSet);
-}
-function read(password, author=""){
-    firebase.database().ref(password).once('value', (snapshot)=>{
-        if(!snapshot.exists()){
-            console.log("404 : Does not exist");
-            return;
+function write(cardSet, password){firebase.database().ref(password).set(cardSet);}
+async function read(password){
+    return firebase.database().ref().child(password).get().then((snapshot) => {
+        if (snapshot.exists()) {
+            return snapshot.val();
         }else{
-            snapshot.forEach(childSnapshot => {
-                //var childKey  = childSnapshot.key;
-                var childData = childSnapshot.val();
-                //console.log(childKey + ": " + childData);
-                if(author != childData["author"])
-                    return;
-                return childData;
-            });
+            console.log("No data available");
         }
+    }).catch((error) => {
+        console.error(error);
     });
 }
-
 // deletes set
 
 // next card
@@ -138,3 +130,5 @@ function enterAuthor(){
     }
     return author;
 }
+
+module.exports = {read, write, save};
