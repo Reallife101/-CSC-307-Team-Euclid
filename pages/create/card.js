@@ -20,7 +20,7 @@ let CardSet = {
         return false;
     },
     //Sets the password for the set, only to be used on creation of card set
-    setPassword(newPass){this.password = passHash(newPass)},
+    setPassword(newPass){this.password = this.passHash(newPass)},
     //Hash function that returns a hash of input string; needs to be added
     passHash(newPass) {return newPass},
     //Appends a card to the cards list
@@ -40,10 +40,14 @@ let CardSet = {
         var lastCard = this.cards[this.cards.length - 1];
         if (lastCard.front == "" || lastCard.back == "")
             this.removeCard(this.cards.length - 1);
-        var jsonOutput = JSON.stringify(this) + JSON.stringify(this.cards);
+        var jsonOutput = JSON.stringify(this);
         if (lastCard.front == "" || lastCard.back == "")
             this.addCard(lastCard);
         console.log(jsonOutput);
+    },
+    toJson(){
+        var output = '"id":'
+        return false
     }
 }
 

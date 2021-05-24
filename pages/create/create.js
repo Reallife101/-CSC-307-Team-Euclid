@@ -1,4 +1,5 @@
 import {Card, CardSet} from "./card.js";
+//import "../database";
 
 // All html elements that are accessed (excluding card buttons this script creates)
 var testCardSet = Object.create(CardSet);
@@ -9,6 +10,7 @@ cardButtonList.onclick = cardButtonClicked;
 document.getElementById("deleteCard").onclick = deleteCard;
 document.getElementById("nextCard").onclick = nextCard;
 document.getElementById("previousCard").onclick = previousCard;
+document.getElementById("uploadCardSet").onclick = uploadCardSet;
 
 // These variables define the current state of the editor
 var currentCardSet = testCardSet;
@@ -96,4 +98,17 @@ function deleteCard(){
         cardButtonList.childNodes[i].id = String(i - 1);
     }
     loadCardToInput();
+}
+
+//Uploads card set to database
+function uploadCardSet(){
+    var id = window.prompt("Please name your card set.");
+    currentCardSet.id = id;
+    var author = window.prompt("Please input an author name");
+    currentCardSet.author = author;
+    var password = window.prompt("Please input a password to edit the card set later.")
+    currentCardSet.setPassword(password);
+
+    currentCardSet.saveSet()
+    //write(currentCardSet, currentCardSet.password);
 }
