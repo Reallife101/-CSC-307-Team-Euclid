@@ -3,7 +3,7 @@ const express = require('express')
 
 const app = express()
 const PORT = process.env.PORT || 8080;
-const PUBLIC = __dirname + '/frontend'
+const PUBLIC = __dirname + '/pages'
 
 app.use(express.static(PUBLIC))
 
