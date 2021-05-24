@@ -31,6 +31,7 @@ body, html {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .button2 {
@@ -119,6 +120,7 @@ li a:hover:not(.active) {
 
 .container {
   padding: 0 16px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .container::after, .row::after {
@@ -129,6 +131,11 @@ li a:hover:not(.active) {
 
 .title {
   color: grey;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.cardText {
+  font-family: 'Times New Roman', sans-serif;
 }
 
 .button {
