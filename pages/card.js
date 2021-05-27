@@ -58,15 +58,18 @@ let CardSet = {
         }
         return formatOutput;
     },
-    //Takes a JSON string and populates this with the
+    //Takes a JSON string and populates this with it
     populateFromJSON(cardSetJSON){
-        this.id = cardSetJSON.id;
-        this.author = cardSetJSON.author;
-        for (var i = 0; i < cardSetJSON.cards.length; i++){
-            var newCard = Object.create(Card);
-            newCard.setFront(cardSetJSON.cards[i].front);
-            newCard.setBack(cardSetJSON.cards[i].back);
-            this.addCard(newCard);
+        var jsonObject = JSON.parse(cardSetJSON);
+        this.id = jsonObject.id;
+        this.author = jsonObject.author;
+        this.cards = []
+
+        for (var i = 0; i < jsonObject.cards.length; i++){
+            var parseCard = Object.create(Card);
+            parseCard.setFront(jsonObject.cards[i].front);
+            parseCard.setBack(jsonObject.cards[i].back);
+            this.addCard(parseCard);
         }
     }
 }

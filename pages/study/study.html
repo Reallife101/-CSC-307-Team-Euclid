@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="../style_sheets/style.css" />
         <link href="card.css" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="study.js"></script>
+        <script type="module" src="study.js"></script>
         <script type="text/javascript">
             var slideIndex = 1;
             showSlides(slideIndex);
@@ -42,8 +42,8 @@
                 for (i = 0; i < dots.length; i++) {
                     dots[i].className = dots[i].className.replace(" active", "");
                 }
-                slides[slideIndex - 1].style.display = "block";
-                dots[slideIndex - 1].className += " active";
+                //slides[slideIndex - 1].style.display = "block";
+                //dots[slideIndex - 1].className += " active";
             }
         </script>
     </head>
