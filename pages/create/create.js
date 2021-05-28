@@ -1,5 +1,5 @@
 import {Card, CardSet} from "../card.js";
-//import "/pages/database.js";
+import "../database.js";
 
 // All html elements that are accessed (excluding card buttons this script creates)
 var testCardSet = Object.create(CardSet);
@@ -13,6 +13,7 @@ document.getElementById("previousCard").onclick = previousCard;
 document.getElementById("uploadCardSet").onclick = uploadCardSet;
 document.getElementById("testJSON").onclick = testJSON;
 document.getElementById("studyCard").onclick = studyCardSet;
+document.getElementById("1").onclick = read2("1");
 
 // These variables define the current state of the editor
 var currentCardSet = testCardSet;
@@ -114,13 +115,13 @@ function uploadCardSet(){
     saveCard();
     currentCardSet.saveSet()
 
-    //write(currentCardSet, currentCardSet.password);
+    write(currentCardSet.toJSON(), currentCardSet.id);
 
 }
 
 function studyCardSet(){
     saveCard();
-    sessionStorage.setItem("currentCardSet", currentCardSet.toJSON());
+    localStorage.setItem("currentCardSet", currentCardSet.toJSON());
     location.href = "../study/study.html"
 }
 
@@ -128,4 +129,11 @@ function testJSON(){
     var jsonCardSet = Object.create(CardSet);
     jsonCardSet.populateFromJSON({"id":"Set 1","author":"N8","password":"123","cards":[{"front":"Hello","back":"Goodbye"},{"front":"1","back":"2"},{"front":"g","back":"h"}]});
     console.log(jsonCardSet.toJSON())
+}
+
+function read2(password){
+    ref.on(value, snapshot => {
+    const data = snapshot.val();
+    console.log(data);
+  });
 }

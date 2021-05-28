@@ -20,7 +20,7 @@ $(document).ready(function() {
             }
             
         })*/
-        testCardSet.populateFromJSON(sessionStorage.getItem("currentCardSet"));
+        testCardSet.populateFromJSON(localStorage.getItem("currentCardSet"));
         loadCurrentCard();
     }
 
