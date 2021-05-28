@@ -3,76 +3,107 @@ $(document).ready(function() {
     var flipped;
     var cur = 0;
     //var qbank = new Array;
-    var testCardSet = Object.create(CardSet);
+    var currentCardSet = Object.create(CardSet);
+    var studyList = [];
     var frontColor = "#f5a742";
     var backColor = "#428af5";
+    document.getElementById("nextButton").onclick = nextButton;
+    document.getElementById("prevButton").onclick = prevButton;
+    document.getElementById("randomize").onclick = loadRandom;
+    document.getElementById("studyIncorrect").onclick = loadIncorrect;
+    document.getElementById("isCorrect").onclick = isCorrect;
+    document.getElementById("reset").onclick = loadInitial;
 
-    loadDB();
+    loadInitial();
 
-    function loadDB() {
-        /*
-        $.getJSON("test.json", function(data) {
-            
-            /* for (var i = 0; i < data.questionlist.length; i++) {
-             *   qbank[i] = [];
-             *   qbank[i][0] = data.questionlist[i].cardfront;
-             *   qbank[i][1] = data.questionlist[i].cardback;
+    function loadInitial() {
+        var curCardJSON = localStorage.getItem("currentCardSet");
+        cur = 0;
+        if (curCardJSON == null){
+            $("#buttonArea").empty();
+            $("#cardArea").empty();
+            $("#cardArea").append('<div id="finalMessage">No Card Set Selected</div>');
+        }
+        else{
+            currentCardSet.populateFromJSON(localStorage.getItem("currentCardSet"));
+            studyList = currentCardSet.getCards();
+            loadCurrentCard();
+        }
+    }
+
+    function loadRandom() {
+        studyList = currentCardSet.shuffleCards();
+        cur = 0;
+        loadCurrentCard()
+    }
+
+    function loadIncorrect() {
+        var incorrectStudyList = [];
+        for (var i = 0; i < studyList.length; i++){
+            if (studyList[i].getCorrect() == false){
+                incorrectStudyList.push(studyList[i]);
             }
-            
-        })*/
-        testCardSet.populateFromJSON(localStorage.getItem("currentCardSet"));
+        }
+        studyList = incorrectStudyList;
+        cur = 0;
         loadCurrentCard();
     }
 
     function loadCurrentCard() {
         flipped = 0;
         $("#cardArea").empty();
-        //$("#cardArea").append('<div id="card1" class="card">' + qbank[cur][0] + '</div>');
-        //$("#cardArea").append('<div id="card2" class="card">' + qbank[cur][1] + '</div>');
-        $("#cardArea").append('<div id="card1" class="card">' + testCardSet.cards[cur].front + '</div>');
-        $("#cardArea").append('<div id="card2" class="card">' + testCardSet.cards[cur].back + '</div>');
+        $("#cardArea").append('<div id="card1" class="card">' + studyList[cur].front + '</div>');
+        $("#cardArea").append('<div id="card2" class="card">' + studyList[cur].back + '</div>');
         $("#card1").css("background-color", frontColor);
         $("#card2").css("background-color", backColor);
         $("#card2").css("top", "200px");
         $("#cardArea").on("click", function() {
+            console.log(flipped);
+            console.log($("#card1").position().top)
             if (flipped != 1) {
                 flipped = 1;
                 $("#card1").animate({
                     top: "-=200"
                 }, 150, function() {
                     flipped = 0;
-                    if ($("#card1").position().top == -200) {
+                    if (Math.abs($("#card1").position().top + 200) < 0.1) {
                         $("#card1").css("top", "200px");
                     }
                 });
                 $("#card2").animate({
                     top: "-=200"
                 }, 150, function() {
-                    if ($("#card2").position().top == -200) {
+                    if (Math.abs($("#card2").position().top + 200) < 0.1) {
                         $("#card2").css("top", "200px");
                     }
                 });
             }
         });
-        cur++;
-        $("#buttonArea").empty();
-        $("#buttonArea").append('<div id="prevButton">PREV</div>');
-        $("#buttonArea").append('<div id="nextButton">NEXT</div>');
-        $("#nextButton").on("click", function() {
-            if (cur < testCardSet.cards.length) {
-                loadCurrentCard();
-            } else {
-                $("#buttonArea").empty();
-                $("#cardArea").empty();
-                $("#cardArea").append('<div id="finalMessage">You have finished the activity.</div>');
-            }
-        });
-        $("#prevButton").on("click", function() {
-            if (cur > 1) {
-                cur -= 2;
-                loadCurrentCard();
-            }
-        });
+        
     }
 
+    function nextButton(){
+        console.log("next");
+        if (cur < studyList.length - 1) {
+            cur++;
+            loadCurrentCard();
+        } else {
+            $("#cardArea").empty();
+            $("#cardArea").append('<div id="finalMessage">You have finished the activity.</div>');
+        }
+    }
+    
+    function prevButton(){
+        console.log("prev");
+        if (cur > 0) {
+            cur--;
+            loadCurrentCard();
+        }
+    }
+
+    function isCorrect(){
+        studyList[cur].setCorrect(true);
+    }
 });
+
+

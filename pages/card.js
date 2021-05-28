@@ -1,10 +1,13 @@
 let Card = {
     front : "",
     back : "",
+    correct : false,
     setFront(newFront) {this.front = String(newFront)},
     setBack(newBack) {this.back = String(newBack)},
     getFront() {return this.front},
-    getBack() {return this.back}
+    getBack() {return this.back},
+    setCorrect(newCorrect) {this.correct = newCorrect},
+    getCorrect() { return this.correct}
 }
 
 let CardSet = {
@@ -12,6 +15,8 @@ let CardSet = {
     id : null,
     author : null,
     password : null,
+    //Returns list of cards in order
+    getCards() {return this.cards},
     //Compares the hash of a passed value to stored hashed password
     checkPassword(checkPass) {
         if (this.password == passHash(checkPass))
@@ -46,6 +51,11 @@ let CardSet = {
     },
     //Returns this object as a formatted JSON string
     toJSON(){
+        //Begin last card complete check
+        var lastCard = this.cards[this.cards.length - 1];
+        if (lastCard.front == "" || lastCard.back == "")
+            this.removeCard(this.cards.length - 1);
+        //Create JSON formatted string
         var formatOutput = '{"id":"'+String(this.id)+'","author":"'+String(this.author)+'","password":"'+String(this.password)+'","cards":[';
         for (var i = 0 ; i < this.cards.length; i++){
             formatOutput = formatOutput + '{"front":"'+this.cards[i].getFront()+'","back":"'+this.cards[i].getBack()+'"}';
@@ -56,6 +66,9 @@ let CardSet = {
                 formatOutput = formatOutput + ",";
             }
         }
+        //End last card complete check
+        if (lastCard.front == "" || lastCard.back == "")
+            this.addCard(lastCard);
         return formatOutput;
     },
     //Takes a JSON string and populates this with it
