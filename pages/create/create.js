@@ -1,5 +1,5 @@
 import {Card, CardSet} from "../card.js";
-//import "../database.js";
+import "../database.js";
 
 // All html elements that are accessed (excluding card buttons this script creates)
 var testCardSet = Object.create(CardSet);
@@ -130,10 +130,10 @@ function testJSON(){
     jsonCardSet.populateFromJSON({"id":"Set 1","author":"N8","password":"123","cards":[{"front":"Hello","back":"Goodbye"},{"front":"1","back":"2"},{"front":"g","back":"h"}]});
     console.log(jsonCardSet.toJSON())
 }
-/*
+
 function read2(password){
     ref.on(value, snapshot => {
     const data = snapshot.val();
     console.log(data);
   });
-}*/
+}
