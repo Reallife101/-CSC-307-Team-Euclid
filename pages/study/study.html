@@ -12,8 +12,8 @@
         <link rel="stylesheet" href="../style_sheets/contact.css" />
         <link rel="stylesheet" href="../style_sheets/base.css">
         <link rel="stylesheet" href="../style_sheets/study.css">
+        <link href="../style_sheets/card.css" rel="stylesheet" type="text/css" />
 
-        <link href="card.css" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="module" src="study.js"></script>
     </head>
@@ -29,19 +29,40 @@
             <li><a href="../about/aboutus.html">About</a></li>
         </ul>
 
-        <!--- Hero Image Stuff --->
-        <div class="hero-image">
-            <div class="hero-text">
-                <h1>Study Cards</h1>
-                <p>Review Material</p>
-            </div>
-        </div>
-
         <div class="ribbon-wrapper-green">
          <div class="ribbon-green">BETA</div>
          </div>
 
         <div class="contact_container">
+            <!-- Title -->
+            <div class="titletext">Study</div>
+
+            <!-- 3 col info -->
+            <div class="border">
+                <div class="third">
+                    <div class="text1"> Cardset Name </div>
+                </div>
+                 <div class="third">
+                    <div class="text1">Cards Completed: 1/15</div>
+                </div>
+                 <div class="third">
+                    <div class="text1"> Score: 0 </div>
+                </div>
+            </div>
+
+             <!-- Options buttons -->
+             <div class="border2">
+                <div class="third">
+                    <button class="button2" id="randomize">Test Full Set</button>
+                </div>
+                 <div class="third">
+                    <button class="button2" id="randomize">Shuffle Set</button>
+                </div>
+                 <div class="third">
+                    <button class="button2" id="randomize">Test Incorrect</button>
+                </div>
+            </div>
+
             <div id="activityTitle">PolyCards Set 1</div>
             <div id="cardArea"></div>
             <div id="buttonArea"></div>
@@ -55,6 +76,10 @@
                 <button class="button3" id="reset">Reset</button>
                 </div>
             </br>
+        </div>
+
+        <div class="ribbon-wrapper-green">
+            <div class="ribbon-green">BETA</div>
         </div>
     </body>
 </html>
