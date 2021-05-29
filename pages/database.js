@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 // write to database
 // read to database
-function write(cardSet, password){firebase.database().ref(password).set(cardSet);}
+function writeToFirebase(cardSet, password){firebase.database().ref(password).set(cardSet);}
 async function read(password){
     return firebase.database().ref().child(password).get().then((snapshot) => {
         if (snapshot.exists()) {
@@ -26,4 +26,4 @@ async function read(password){
     });
 }
 
-export { read, write };
+export { read, writeToFirebase };
