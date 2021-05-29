@@ -25,18 +25,36 @@
 			  	<li><a href="../about/aboutus.html">About</a></li>
 			</ul>
 		
-	  	<!--- Hero Image Stuff --->
-		<script type="module" src="./create.js"></script>
-	  	<div class="hero-image">
-			<div class="hero-text">
-				<h1>Create Study Set</h1>
-			</div>
-		</div>
+	  	<div class="create_container">
+	  		<!-- beta banner-->
+	  		<div class="ribbon-wrapper-green">
+         <div class="ribbon-green">BETA</div>
+         </div>
+	  		<!-- Title -->
+            <div class="titletext">Create</div>
 
-		<div class="create_container">
-			<input type="text" id="className" placeholder="Class" style="text-align: center">
-			<input type="text" id="teacherName" placeholder="Teacher" style="text-align: center">
-			<input type="text" id="subjectName" placeholder="Subject" style="text-align: center">
+            <!-- 3 col info -->
+            <div class="border">
+                <div class="third">
+                    <div class="border2">
+                		<div class="third">
+							<input class="input1" type="text" id="className" placeholder="Class">
+                		</div>
+                		<div class="third">
+							<input class="input1" type="text" id="teacherName" placeholder="Teacher">
+                		</div>
+                		<div class="third">
+							<input class="input1" type="text" id="subjectName" placeholder="Subject">
+                		</div>
+                	</div>
+                </div>
+                 <div class="third">
+                    <div class="text1">Current Card 1/15</div>
+                </div>
+                 <div class="third">
+                </div>
+            </div>
+
 			<br>
 			<button class="button3" id="uploadCardSet">Upload Card Set</button>
 			<button class="button3" id="studyCard">Study Card</button>
@@ -56,6 +74,7 @@
 
 			</form>
 		</div>
+
 		
 	</body>
 </html>
