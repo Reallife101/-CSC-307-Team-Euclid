@@ -1,6 +1,6 @@
 import {Card, CardSet} from "../card.js";
 $(document).ready(function() {
-    var flipped;
+    var flipped = 0;
     var cur = 0;
     //var qbank = new Array;
     var currentCardSet = Object.create(CardSet);
@@ -13,6 +13,7 @@ $(document).ready(function() {
     document.getElementById("studyIncorrect").onclick = loadIncorrect;
     document.getElementById("isCorrect").onclick = isCorrect;
     document.getElementById("reset").onclick = loadInitial;
+    document.getElementById("cardArea").onclick = flipCard;
 
     loadInitial();
 
@@ -56,30 +57,19 @@ $(document).ready(function() {
         $("#cardArea").append('<div id="card2" class="card">' + studyList[cur].back + '</div>');
         $("#card1").css("background-color", frontColor);
         $("#card2").css("background-color", backColor);
-        $("#card2").css("top", "200px");
-        $("#cardArea").on("click", function() {
-            console.log(flipped);
-            console.log($("#card1").position().top)
-            if (flipped != 1) {
-                flipped = 1;
-                $("#card1").animate({
-                    top: "-=200"
-                }, 150, function() {
-                    flipped = 0;
-                    if (Math.abs($("#card1").position().top + 200) < 0.1) {
-                        $("#card1").css("top", "200px");
-                    }
-                });
-                $("#card2").animate({
-                    top: "-=200"
-                }, 150, function() {
-                    if (Math.abs($("#card2").position().top + 200) < 0.1) {
-                        $("#card2").css("top", "200px");
-                    }
-                });
-            }
-        });
-        
+        $("#card2").css("top", $("#card2").height());
+    }
+
+    function flipCard(){
+        if (!flipped){
+            $("#card1").animate({top: -$("#card1").height()}, 150);
+            $("#card2").animate({top: "0px"}, 150);
+        }
+        else{
+            $("#card1").animate({top: "0px"}, 150);
+            $("#card2").animate({top: $("#card2").height()}, 150); 
+        }
+        flipped = !flipped;
     }
 
     function nextButton(){
