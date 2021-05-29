@@ -1,0 +1,76 @@
+
+/* About Us */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.aboutus {
+  width:100%; 
+  height: 300px; 
+  object-fit: cover;
+}
+
+.row {
+  left: 10%;
+  width: 90%;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.column {
+  float: left;
+  width: 25.0%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 0 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.cardText {
+  font-family: 'Times New Roman', sans-serif;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
