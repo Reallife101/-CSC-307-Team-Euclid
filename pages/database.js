@@ -1,7 +1,12 @@
-const { request } = require("express");
-const firebase = require("firebase/app") //https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"
-require("firebase/analytics")            //"https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"
-require("firebase/database")             //"https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"
+//const { request } = require("express");
+//const firebase = require("firebase/app") //https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"
+//require("firebase/analytics")            //"https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"
+//require("firebase/database")             //"https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"
+
+import { request } from "../node_modules/express";
+import { firebase } from "../node_modules/firebase/app";
+import "../node_modules/firebase/analytics";
+import "../node_modules/firebase/database";
 
 var firebaseConfig = {
     apiKey:        "AIzaSyDl0gkgD1D9usTr8ngnMr5bRVu5Ac2jbmg",
