@@ -13,8 +13,12 @@ let Card = {
 let CardSet = {
     cards : [],
     id : null,
+    class: null,
+    professor: null,
+    subject: null,
     author : null,
     password : null,
+    createId(){this.id = this.class+"-"+this.professor+"-"+this.subject+"-"+this.author},
     //Returns list of cards in order
     getCards() {return this.cards},
     //Compares the hash of a passed value to stored hashed password
@@ -42,34 +46,29 @@ let CardSet = {
     },
     saveSet(){
         var lastCard = this.cards[this.cards.length - 1];
-        if (lastCard.front == "" || lastCard.back == "")
+        var completedLength = 0;
+        if (lastCard == null){}
+        else if (lastCard.front == "" || lastCard.back == "")
             this.removeCard(this.cards.length - 1);
-        var jsonOutput = this.toJSON();
-        if (lastCard.front == "" || lastCard.back == "")
+        completedLength = this.cards.length;
+        if (lastCard == null){}
+        else if (lastCard.front == "" || lastCard.back == "")
             this.addCard(lastCard);
-        console.log(jsonOutput);
+        return completedLength;
     },
     //Returns this object as a formatted JSON string
     toJSON(){
         //Begin last card complete check
         var lastCard = this.cards[this.cards.length - 1];
-        if (lastCard.front == "" || lastCard.back == "")
+        if (lastCard == null){}
+        else if (lastCard.front == "" || lastCard.back == "")
             this.removeCard(this.cards.length - 1);
-        //Create JSON formatted string
-        var formatOutput = '{"id":"'+String(this.id)+'","author":"'+String(this.author)+'","password":"'+String(this.password)+'","cards":[';
-        for (var i = 0 ; i < this.cards.length; i++){
-            formatOutput = formatOutput + '{"front":"'+this.cards[i].getFront()+'","back":"'+this.cards[i].getBack()+'"}';
-            if (i == this.cards.length - 1){
-                formatOutput = formatOutput + "]}";
-            }
-            else{
-                formatOutput = formatOutput + ",";
-            }
-        }
+        var tempCards = this.cards;
         //End last card complete check
-        if (lastCard.front == "" || lastCard.back == "")
+        if (lastCard == null){}
+        else if (lastCard.front == "" || lastCard.back == "")
             this.addCard(lastCard);
-        return formatOutput;
+        return {"id": this.id, "class": this.class, "professor": this.professor, "subject": this.subject, "author": this.author, "password": this.password, "cards": tempCards};
     },
     //Takes a JSON string and populates this with it
     populateFromJSON(cardSetJSON){

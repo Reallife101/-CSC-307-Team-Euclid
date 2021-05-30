@@ -62,7 +62,7 @@ function previousCard(){
 function saveCard(){
     currentCard.setFront(frontTextBox.value);
     currentCard.setBack(backTextBox.value);
-    currentButton.innerText = currentCard.front;
+    currentButton.innerText = currentCard.front.slice(0, 10);
 }
 
 // Loads the values of the current card to the user input fields for editing
@@ -78,6 +78,7 @@ function createNewCardButton(){
     var newButton = document.createElement("button");
     cardButtonList.append(newButton);
     newButton.id = String(currentIndex);
+    newButton.className = "listButton";
     frontTextBox.value = "";
     backTextBox.value = "";
     return newButton;
@@ -104,17 +105,42 @@ function deleteCard(){
 
 //Uploads card set to database
 function uploadCardSet(){
-    var id = window.prompt("Please name your card set.");
-    currentCardSet.id = id;
-    var author = window.prompt("Please input an author name");
-    currentCardSet.author = author;
-    var password = window.prompt("Please input a password to edit the card set later.")
-    currentCardSet.setPassword(password);
+    var className = document.getElementById("className").value;
+    var professorName = document.getElementById("professorName").value;
+    var subjectName = document.getElementById("subjectName").value;
+    console.log(className);
+    console.log(professorName);
+    console.log(subjectName);
+    if (className == "" || professorName == "" || subjectName == ""){
+        window.alert("Pleae fill out Class Name, Professor Name, and Subject Name");
+    }
+    else{
+        currentCardSet.class = className;
+        currentCardSet.professor = professorName;
+        currentCardSet.subject = subjectName;
+        saveCard();
+        var filledSet = currentCardSet.saveSet()
+        if (filledSet == 0){
+            window.alert("Pleae have at least one complete card");
+        }
+        else{
+            var author = window.prompt("Please input an author name");
+            currentCardSet.author = author;
+            var password = window.prompt("Please input a password for editing the card set later")
+            currentCardSet.setPassword(password);
 
-    saveCard();
-    currentCardSet.saveSet()
-
-    writeToFirebase(currentCardSet.toJSON(), currentCardSet.id);
+            if (password != null && author != null && password != "" && author != ""){
+                currentCardSet.createId();
+                writeToFirebase(currentCardSet.toJSON(), currentCardSet.id);
+                window.alert("Your card set has been uploaded!");
+            }
+            else{
+                window.alert("Your card set upload has been cancelled");
+            }
+        }
+        
+    }
+    
 
 }
 
