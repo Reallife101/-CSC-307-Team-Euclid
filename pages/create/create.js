@@ -60,6 +60,11 @@ function previousCard(){
 
 // Saves the user data in input fields to current card
 function saveCard(){
+    if (currentCard == null || currentButton == null){
+        currentIndex = 0;
+        currentCard = currentCardSet.cards[currentIndex];
+        currentButton = cardButtonList.childNodes[currentIndex + 1];
+    }
     currentCard.setFront(frontTextBox.value);
     currentCard.setBack(backTextBox.value);
     currentButton.innerText = currentCard.front.slice(0, 10);
