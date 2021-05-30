@@ -2,6 +2,7 @@
 .create_container {
   left: 10%;
   width: 90%;
+  height: 100%;
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
   background-repeat: no-repeat;
@@ -86,7 +87,8 @@
   font-family: 'Open Sans', sans-serif;
   display: block;
   text-align: center;
-  border: 3px solid #000;
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-color: #CCCCCC;
 }
 
 /*Border 1*/
@@ -120,6 +122,18 @@
 }
 
 .border3:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* border 4*/
+.border4 {
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-color: #CCCCCC;
+}
+
+.border4:after {
   content: "";
   display: table;
   clear: both;

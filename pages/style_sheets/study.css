@@ -39,7 +39,8 @@ body, html {
   font-family: 'Open Sans', sans-serif;
   display: block;
   text-align: center;
-  border: 3px solid #000;
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-color: #CCCCCC;
 }
 
 /*Border 1*/
@@ -64,6 +65,18 @@ body, html {
   clear: both;
 }
 
+/* border 3*/
+.border3 {
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-color: #CCCCCC;
+}
+
+.border3:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .third {
   width: 33%;
   float: left;
@@ -75,4 +88,27 @@ body, html {
   font-family: 'Open Sans', sans-serif;
   display: block;
   text-align: center;
+}
+
+.contact_container {
+  left: 10%;
+  width: 90%;
+  height: 100%;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 0px;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
 }
