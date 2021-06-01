@@ -11,12 +11,12 @@ let Card = {
 }
 
 let CardSet = {
-    cards : [],
-    id : null,
-    class: null,
+    cards :    [],
+    id :       null,
+    class:     null,
     professor: null,
-    subject: null,
-    author : null,
+    subject:   null,
+    author :   null,
     password : null,
     createId(){this.id = this.class+"-"+this.professor+"-"+this.subject+"-"+this.author},
     //Returns list of cards in order
@@ -72,17 +72,22 @@ let CardSet = {
     },
     //Takes a JSON string and populates this with it
     populateFromJSON(cardSetJSON){
-        var jsonObject = JSON.parse(cardSetJSON);
-        this.id = jsonObject.id;
-        this.author = jsonObject.author;
-        this.cards = []
+        //var jsonObject = JSON.parse(cardSetJSON);
+        this.id        = cardSetJSON["id"];
+        this.author    = cardSetJSON["author"];
+        this.professor = cardSetJSON["professor"];
+        this.subject   = cardSetJSON["subject"];
+        this.password  = cardSetJSON["password"];
+        this.class     = cardSetJSON["class"];
+        this.cards     = []
 
-        for (var i = 0; i < jsonObject.cards.length; i++){
+        for (var i = 0; i < cardSetJSON["cards"].length; i++){
             var parseCard = Object.create(Card);
-            parseCard.setFront(jsonObject.cards[i].front);
-            parseCard.setBack(jsonObject.cards[i].back);
+            parseCard.setFront(cardSetJSON["cards"][i]["front"]);
+            parseCard.setBack(cardSetJSON["cards"][i]["back"]);
             this.addCard(parseCard);
         }
+        return this;
     }
 }
 
