@@ -5,20 +5,20 @@ console.log(firebase);
 // All html elements that are accessed (excluding card buttons this script creates)
 var testCardSet = Object.create(CardSet);
 var cardButtonList = document.getElementById("cardButtonList");
-var frontTextBox = document.getElementById("frontText");
-var backTextBox = document.getElementById("backText");
+var frontTextBox   = document.getElementById("frontText");
+var backTextBox    = document.getElementById("backText");
 cardButtonList.onclick = cardButtonClicked;
-document.getElementById("deleteCard").onclick = deleteCard;
-document.getElementById("nextCard").onclick = nextCard;
-document.getElementById("previousCard").onclick = previousCard;
+document.getElementById("deleteCard").onclick    = deleteCard;
+document.getElementById("nextCard").onclick      = nextCard;
+document.getElementById("previousCard").onclick  = previousCard;
 document.getElementById("uploadCardSet").onclick = uploadCardSet;
-document.getElementById("studyCard").onclick = studyCardSet;
+document.getElementById("studyCard").onclick     = studyCardSet;
 
 // These variables define the current state of the editor
 var currentCardSet = testCardSet;
-var currentCard = createNewCard();
-var currentIndex = 0;
-var currentButton = createNewCardButton();
+var currentCard    = createNewCard();
+var currentIndex   = 0;
+var currentButton  = createNewCardButton();
 
 // Creates a new, blank card and adds it to the current card set
 function createNewCard(){
