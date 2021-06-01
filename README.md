@@ -27,4 +27,9 @@ To begin setting up the project for development, the following should be install
 4. [Heroku](https://devcenter.heroku.com/articles/heroku-cli)
 
 ### Setting up the Environment
-First, set up the repository by cloning it to your workspace. The pages folder holds all of the seperate pages of the website. Each page is represented by a folder containing its front end and back end components. All style sheets should be within the style_sheets folder.
+First, set up the repository by cloning it to your workspace. Make sure you can open all files in the pages folder with your perferred text editor. Then, ensure node js is installed by running ```node index.js``` and seeing if it runs the website locally. If not, refer to the node js help pages for assistance.
+
+### Organization
+The pages folder holds all of the seperate pages of the website. Each page is represented by a folder containing its front end and back end components. All style sheets should be within the style_sheets folder.
+
+We generally perfer that you work on your own branch. This way, we can develop things simaltanously more easily. Once your code has been tested and you would like to merge, open up a pull request and request a review, supplying all necessary information. Generally, we perfer squash commits because they make the history cleaner, but we have already nuked our history once, so it is understandable if you'd like to do something else.
