@@ -9,7 +9,7 @@ let Card = {
     setCorrect(newCorrect) {this.correct = newCorrect},
     getCorrect() { return this.correct},
     toJSON() {return {"front" : this.front, "back" : this.back};},
-    fromJSON(jsonObj) {
+    fromJSON(jsonObj){
         this.front = jsonObj["front"];
         this.back  = jsonObj["back"];
         return this;
@@ -65,20 +65,15 @@ let CardSet = {
     //Returns this object as a formatted JSON string
     toJSON(){
         //Begin last card complete check
-        // var lastCard = this.cards[this.cards.length - 1];
-        // if (lastCard == null){}
-        // else if (lastCard.front == "" || lastCard.back == "")
-        //     this.removeCard(this.cards.length - 1);
-        // var tempCards = this.cards;
-        // //End last card complete check
-        // if (lastCard == null){}
-        // else if (lastCard.front == "" || lastCard.back == "")
-        //     this.addCard(lastCard);
-        var tempCards = {}
-        for(let cards in this.cards){
-            if(cards.front!="" && cards.back!="")
-                tempCards += cards.toJSON();
-        }
+        var lastCard = this.cards[this.cards.length - 1];
+        if (lastCard == null){}
+        else if (lastCard.front == "" || lastCard.back == "")
+            this.removeCard(this.cards.length - 1);
+        var tempCards = this.cards;
+        //End last card complete check
+        if (lastCard == null){}
+        else if (lastCard.front == "" || lastCard.back == "")
+            this.addCard(lastCard);
         return {
             "id":        this.id, 
             "class":     this.class, 
