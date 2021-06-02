@@ -54,6 +54,18 @@ body, html {
   clear: both;
 }
 
+/* border 4*/
+.border4 {
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-color: #CCCCCC;
+}
+
+.border4:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /* border 2*/
 .border2 {
   border: 3px solid rgba(0, 0, 0, 0);
