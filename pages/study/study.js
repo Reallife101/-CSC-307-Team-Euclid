@@ -1,4 +1,5 @@
 import {Card, CardSet} from "../card.js";
+
 $(document).ready(function() {
     var flipped = 0;
     var cur = 0;

@@ -127,6 +127,7 @@ function uploadCardSet(){
         var filledSet = currentCardSet.saveSet()
         if (filledSet == 0){
             window.alert("Pleae have at least one complete card");
+            return false;
         }
         else{
             var author = window.prompt("Please input an author name");
@@ -136,21 +137,25 @@ function uploadCardSet(){
 
             if (password != null && author != null && password != "" && author != ""){
                 currentCardSet.createId();
-                writeToFirebase(currentCardSet.toJSON(), currentCardSet.id);
+                writeToFirebase(currentCardSet.toDict(), currentCardSet.id);
+                localStorage.setItem(currentCardSet.id, JSON.stringify(currentCardSet.toDict()));
                 window.alert("Your card set has been uploaded!");
+                return true;
             }
             else{
                 window.alert("Your card set upload has been cancelled");
+                return false;
             }
         }
         
     }
-    
+    return false;
 
 }
 
 function studyCardSet(){
     saveCard();
-    localStorage.setItem("currentCardSet", currentCardSet.toJSON());
-    location.href = "../study/study.html"
+    localStorage.setItem("currentCardSet", JSON.stringify(currentCardSet.toDict()));
+    location.href = "../study/study.html";
+    
 }

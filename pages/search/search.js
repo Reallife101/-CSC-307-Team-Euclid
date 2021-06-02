@@ -1,33 +1,27 @@
 import {Card, CardSet} from "../card.js";
 import { readFromFirebase } from "../database.js";
 
-console.log(firebase);
+loadSets();
+/*
 document.getElementById("searchButton").onclick = () => {
     var getSearchVal = document.getElementById("searchTerm").value;
     if(getSearchVal != null){
         search(getSearchVal);
     }
+}*/
+
+function createEntry(set){
+   console.log(set);
 }
 
-function search(traits){
+function loadSets(){
     readFromFirebase("set-names").then(
         (succ) => {
             succ.forEach((item) => {
                 firebase.database().ref().child(item).get().then((snapshot) => {
                     if (snapshot.exists()){
-                        var items = snapshot.val();
-                        if(traits.includes(items["class"]) || traits.includes(items["professor"]) ||
-                             traits.includes(items["subject"]) || traits.includes(items["author"])){
-                            console.log(items);
-                            //TODO 
-                            console.log(CardSet.populateFromJSON(items).id);
-                            console.log(item);
-                            // adds item to if its not been seen before list of found sets
-                            var found = document.getElementById("Found");
-                            if(found.value == undefined || !found.value.includes(item)){
-                                found.innerHTML = item + '\n'
-                            }
-                        }
+                        var set = snapshot.val();
+                        createEntry(set);
                     }
                 }).catch((error) => {
                     console.error(error);
