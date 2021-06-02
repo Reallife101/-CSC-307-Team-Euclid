@@ -74,32 +74,24 @@ let CardSet = {
         if (lastCard == null){}
         else if (lastCard.front == "" || lastCard.back == "")
             this.addCard(lastCard);
-        return {
-            "id":        this.id, 
-            "class":     this.class, 
-            "professor": this.professor, 
-            "subject":   this.subject, 
-            "author":    this.author, 
-            "password":  this.password, 
-            "cards":     tempCards
-            };
+
+        var dict = {"id": this.id, "class": this.class, "professor": this.professor, "subject": this.subject, "author": this.author, "password": this.password, "cards": tempCards};
+        return JSON.stringify(dict);
     },
     //Takes a JSON string and populates this with it
     populateFromJSON(cardSetJSON){
-        //var jsonObject = JSON.parse(cardSetJSON);
-        this.id        = cardSetJSON["id"];
-        this.author    = cardSetJSON["author"];
-        this.professor = cardSetJSON["professor"];
-        this.subject   = cardSetJSON["subject"];
-        this.password  = cardSetJSON["password"];
-        this.class     = cardSetJSON["class"];
-        this.cards     = []
-        
-        for(let elem in cardSetJSON["cards"]){
-            this.cards += Card.fromJSON(elem);
+        //alert(cardSetJSON[1]);
+        var jsonObject = JSON.parse(cardSetJSON);
+        this.id = jsonObject.id;
+        this.author = jsonObject.author;
+        this.cards = [];
+
+        for (var i = 0; i < jsonObject.cards.length; i++){
+            var parseCard = Object.create(Card);
+            parseCard.setFront(jsonObject.cards[i].front);
+            parseCard.setBack(jsonObject.cards[i].back);
+            this.addCard(parseCard);
         }
-        return this;
-    }
 }
 
 export { Card, CardSet };
