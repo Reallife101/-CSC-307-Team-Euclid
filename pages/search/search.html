@@ -19,7 +19,7 @@
 			  	<li><a href="../index.html">Home</a></li>
 			  	<li><a class="active" href="search.html">Search</a></li>
 			  	<li><a href="../study/study.html">Study</a></li>
-			  	<li><a href="../create/create.html">Editor</a></li>
+			  	<li><a href="../create/create.html">Create</a></li>
 			  	<li><a href="../contact/contact.html">Contact</a></li>
 			  	<li><a href="../about/aboutus.html">About</a></li>
 			</ul>
@@ -29,18 +29,26 @@
 			<div class="hero-text">
 				<h1>Search Cards</h1>
 				<p>Find card sets by professor or class</p>
+				<p align=center>Please separate by commas</p>
 			</div>
 		</div>
-
-
-<div class="wrap">
-   <div class="search">
-      <input type="text" class="searchTerm" placeholder="Search our collection of flashcard sets">
-      <button type="submit" class="searchButton">
-        <img src="search.png">
-     </button>
-   </div>
-</div>
-
+		
+		<div class="wrap">
+			<div class="search">
+				<input type="text" class="searchTerm" id="searchTerm" placeholder="Search our collection of flashcard sets">
+				<button class="button3" class="searchTerm" id="searchButton">
+					<img src="search.png">
+				</button>	
+			</div>
+		</div>
+		<div align=center>
+			<p id="Found"></p>
+		</div>
+		
+		<script src="search.js" type="module"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-database.js"></script>
 	</body>
 </html>

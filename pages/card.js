@@ -1,22 +1,28 @@
 let Card = {
     front : "",
-    back : "",
+    back :  "",
     correct : false,
     setFront(newFront) {this.front = String(newFront)},
     setBack(newBack) {this.back = String(newBack)},
     getFront() {return this.front},
     getBack() {return this.back},
     setCorrect(newCorrect) {this.correct = newCorrect},
-    getCorrect() { return this.correct}
+    getCorrect() { return this.correct},
+    toJSON() {return {"front" : this.front, "back" : this.back};},
+    fromJSON(jsonObj){
+        this.front = jsonObj["front"];
+        this.back  = jsonObj["back"];
+        return this;
+        }
 }
 
 let CardSet = {
-    cards : [],
-    id : null,
-    class: null,
+    cards :    [],
+    id :       null,
+    class:     null,
     professor: null,
-    subject: null,
-    author : null,
+    subject:   null,
+    author :   null,
     password : null,
     createId(){this.id = this.class+"-"+this.professor+"-"+this.subject+"-"+this.author},
     //Returns list of cards in order
@@ -68,6 +74,7 @@ let CardSet = {
         if (lastCard == null){}
         else if (lastCard.front == "" || lastCard.back == "")
             this.addCard(lastCard);
+
         var dict = {"id": this.id, "class": this.class, "professor": this.professor, "subject": this.subject, "author": this.author, "password": this.password, "cards": tempCards};
         return JSON.stringify(dict);
     },
@@ -85,7 +92,6 @@ let CardSet = {
             parseCard.setBack(jsonObject.cards[i].back);
             this.addCard(parseCard);
         }
-    }
 }
 
 export { Card, CardSet };

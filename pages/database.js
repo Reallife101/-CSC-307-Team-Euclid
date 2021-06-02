@@ -10,12 +10,29 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
 // write to database
 // read to database
-function writeToFirebase(cardSet, password){firebase.database().ref(password).set(cardSet);}
-async function read(password){
-    return firebase.database().ref().child(password).get().then((snapshot) => {
+function writeToFirebase(cardSet, id){
+    firebase.database().ref().child("set-names").get().then((snapshot) => {
+        if (snapshot.exists()) {
+            console.log("exists");
+            var setIds = snapshot.val();
+            if(!setIds.includes(id)){
+                setIds = setIds.concat(id);
+                firebase.database().ref("set-names").set(setIds);
+            }
+        }else{
+            console.log("doesnt exists");
+            firebase.database().ref("set-names").set([id]);
+        }
+    }).catch((error) => {
+        console.log("error");
+        console.error(error);
+    });
+    firebase.database().ref(id).set(cardSet);
+}
+async function readFromFirebase(id){
+    return firebase.database().ref().child(id).get().then((snapshot) => {
         if (snapshot.exists()) {
             return snapshot.val();
         }else{
@@ -26,4 +43,4 @@ async function read(password){
     });
 }
 
-export { read, writeToFirebase };
+export { readFromFirebase, writeToFirebase };
