@@ -5,6 +5,23 @@ body{
   font-family: 'Open Sans', sans-serif;
 }
 
+/* Add a background color and some padding around the form */
+.create_container {
+  left: 10%;
+  width: 90%;
+  height: 100%;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  border-radius: 0px;
+  background-color: #f2f2f2;
+  padding: 0px;
+}
+
+
 .search {
   width: 150%;
   position: relative;
@@ -45,4 +62,78 @@ margin-top:5px;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.third {
+  width: 33%;
+  float: left;
+
+}
+.couple {
+  width: 50%;
+  float: left;
+
+}
+
+/* Button 2 */
+.button2 {
+  color: white;
+  background-color: #4CAF50;
+  text-align: center;
+  border: 2px solid #000;
+  padding: 8px;
+  border-radius: 15px;
+  width: 40%;
+}
+
+.button2:hover {
+  background-color: #45a049;
+}
+
+.text1 {
+  font-size:28px;
+  font-family: 'Open Sans', sans-serif;
+  display: block;
+  text-align: center;
+}
+
+
+/* border 4*/
+.border4 {
+  border: 3px solid black;
+  background-color: #CCCCCC;
+}
+
+.border4:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* border 3*/
+.border3 {
+  border: 3px solid rgba(0, 0, 0, 0);
+}
+
+.border3:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The hero image */
+.hero-image2 {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/about-calpoly-aerial.jpg");
+
+  /* Set a specific height */
+  height: 30%;
+  width: 90%;
+  left: 10%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }
