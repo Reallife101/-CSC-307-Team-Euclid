@@ -1,9 +1,7 @@
 import {Card, CardSet} from "../card.js";
 import { writeToFirebase } from "../database.js";
 
-console.log(firebase);
 // All html elements that are accessed (excluding card buttons this script creates)
-var testCardSet = Object.create(CardSet);
 var cardButtonList = document.getElementById("cardButtonList");
 var frontTextBox   = document.getElementById("frontText");
 var backTextBox    = document.getElementById("backText");
@@ -13,17 +11,56 @@ document.getElementById("nextCard").onclick      = nextCard;
 document.getElementById("previousCard").onclick  = previousCard;
 document.getElementById("uploadCardSet").onclick = uploadCardSet;
 document.getElementById("studyCard").onclick     = studyCardSet;
+document.getElementById("clearAll").onclick = clearAll;
 
 // These variables define the current state of the editor
-var currentCardSet = testCardSet;
-var currentCard    = createNewCard();
+var currentCardSet = Object.create(CardSet);
+var currentCard    = null
 var currentIndex   = 0;
 var currentButton  = createNewCardButton();
 
-loadInitial();
+$(document).ready(function() {
+    loadInitial();
 
-function loadInitial(){
-    return false;
+    function loadInitial(){
+        var curCardJSON = JSON.parse(localStorage.getItem("currentCardSet"));
+            
+        if (curCardJSON != null){
+            currentCardSet.parse(curCardJSON);
+            for (var i = 0; i < currentCardSet.cards.length - 1; i++){
+                currentCard = currentCardSet.cards[i];
+                frontTextBox.value = currentCardSet.cards[i].front;
+                backTextBox.value = currentCardSet.cards[i].back;
+                saveCard();
+                currentIndex += 1;
+                loadCardToInput();
+                currentButton = createNewCardButton();
+            }
+            frontTextBox.value = currentCardSet.cards[currentCardSet.cards.length - 1].front;
+            backTextBox.value = currentCardSet.cards[currentCardSet.cards.length - 1].back;
+            document.getElementById("className").value = currentCardSet.class;
+            document.getElementById("professorName").value = currentCardSet.professor;
+            document.getElementById("subjectName").value = currentCardSet.subject;
+        }
+        else{
+            currentCard = Object.create(Card);
+        }
+    }
+})
+
+function clearAll(){
+    for (var i = currentCardSet.cards.length - 1; i > -1; i--){
+        currentIndex = i;
+        currentCard = currentCardSet.cards[i];
+        currentButton = cardButtonList.childNodes[currentIndex + 1];
+        deleteCard();
+    }
+
+    currentCardSet = Object.create(cardSet);
+    currentCard    = createNewCard();
+    currentIndex   = 0;
+    currentButton  = createNewCardButton();
+    loadCardToInput();
 }
 
 // Creates a new, blank card and adds it to the current card set
@@ -73,7 +110,7 @@ function saveCard(){
     }
     currentCard.setFront(frontTextBox.value);
     currentCard.setBack(backTextBox.value);
-    currentButton.innerText = currentCard.front.slice(0, 10);
+    currentButton.innerText = currentCard.front.slice(0, 7);
 }
 
 // Loads the values of the current card to the user input fields for editing
@@ -106,12 +143,16 @@ function cardButtonClicked(input){
 
 // Deletes the current card from the current card set
 function deleteCard(){
-    currentCardSet.removeCard(currentIndex);
-    currentButton.remove();
-    for (var i = 0; i < cardButtonList.childNodes.length; i++){
-        cardButtonList.childNodes[i].id = String(i - 1);
+    if (currentCardSet.cards.length > 1){
+        currentCardSet.removeCard(currentIndex);
+        currentButton.remove();
+        for (var i = 0; i < cardButtonList.childNodes.length; i++){
+            cardButtonList.childNodes[i].id = String(i - 1);
+        }
+        if (currentIndex > currentCardSet.cards.length - 1)
+            currentIndex--;
+        loadCardToInput();
     }
-    loadCardToInput();
 }
 
 //Uploads card set to database
@@ -119,9 +160,7 @@ function uploadCardSet(){
     var className = document.getElementById("className").value;
     var professorName = document.getElementById("professorName").value;
     var subjectName = document.getElementById("subjectName").value;
-    console.log(className);
-    console.log(professorName);
-    console.log(subjectName);
+
     if (className == "" || professorName == "" || subjectName == ""){
         window.alert("Pleae fill out Class Name, Professor Name, and Subject Name");
     }

@@ -64,6 +64,10 @@ function createEntry(set){
     var editButton = document.createElement("button");
     editButton.className = "button2";
     editButton.innerText = "Edit";
+    editButton.onclick = function () {
+        localStorage.setItem("currentCardSet", JSON.stringify(set));
+        location.href = "../create/create.html";
+    }
 
     studyCouple.append(studyButton);
     editCouple.append(editButton);
