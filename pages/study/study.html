@@ -14,7 +14,7 @@
         <link href="../style_sheets/card.css" rel="stylesheet" type="text/css" />
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script type="module" src="study.js"></script>
+        
     </head>
 
     <body>
@@ -39,13 +39,13 @@
             <!-- 3 col info -->
             <div class="border3">
                 <div class="third">
-                    <div class="text1"> Cardset Name </div>
+                    <div id="setName" class="text1"> Cardset Name </div>
                 </div>
                  <div class="third">
-                    <div class="text1">Cards Completed: 1/15</div>
+                    <div id="counter" class="text1">Cards Completed: </div>
                 </div>
                  <div class="third">
-                    <div class="text1"> Score: 0 </div>
+                    <div id="score" class="text1"> Score: 0 </div>
                 </div>
             </div>
 
@@ -80,5 +80,6 @@
         <div class="ribbon-wrapper-green">
             <div class="ribbon-green">BETA</div>
         </div>
+        <script type="module" src="study.js"></script>
     </body>
 </html>

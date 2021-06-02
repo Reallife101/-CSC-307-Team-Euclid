@@ -68,14 +68,16 @@ let CardSet = {
         if (lastCard == null){}
         else if (lastCard.front == "" || lastCard.back == "")
             this.addCard(lastCard);
-        return {"id": this.id, "class": this.class, "professor": this.professor, "subject": this.subject, "author": this.author, "password": this.password, "cards": tempCards};
+        var dict = {"id": this.id, "class": this.class, "professor": this.professor, "subject": this.subject, "author": this.author, "password": this.password, "cards": tempCards};
+        return JSON.stringify(dict);
     },
     //Takes a JSON string and populates this with it
     populateFromJSON(cardSetJSON){
+        //alert(cardSetJSON[1]);
         var jsonObject = JSON.parse(cardSetJSON);
         this.id = jsonObject.id;
         this.author = jsonObject.author;
-        this.cards = []
+        this.cards = [];
 
         for (var i = 0; i < jsonObject.cards.length; i++){
             var parseCard = Object.create(Card);

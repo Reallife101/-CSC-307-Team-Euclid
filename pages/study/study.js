@@ -2,7 +2,8 @@ import {Card, CardSet} from "../card.js";
 $(document).ready(function() {
     var flipped = 0;
     var cur = 0;
-    //var qbank = new Array;
+    var progress = 0;
+    var score = 0;
     var currentCardSet = Object.create(CardSet);
     var studyList = [];
     var frontColor = "#f5a742";
@@ -18,24 +19,30 @@ $(document).ready(function() {
     loadInitial();
 
     function loadInitial() {
-        var curCardJSON = localStorage.getItem("currentCardSet");
+
+        var curCardJSON = JSON.parse(localStorage.getItem("currentCardSet"));
+
         cur = 0;
         if (curCardJSON == null){
             $("#buttonArea").empty();
             $("#cardArea").empty();
             $("#cardArea").append('<div id="finalMessage">No Card Set Selected</div>');
+            document.getElementById('setName').textContent = "Select a card set";
         }
         else{
-            currentCardSet.populateFromJSON(localStorage.getItem("currentCardSet"));
-            studyList = currentCardSet.getCards();
+            //alert(localStorage.getItem("currentCardSet").length);
+            document.getElementById('setName').textContent = curCardJSON["id"] == null ? "Unnamed Set" : curCardJSON["id"];
+            studyList = curCardJSON["cards"];
             loadCurrentCard();
         }
     }
 
+
+    
     function loadRandom() {
         studyList = currentCardSet.shuffleCards();
         cur = 0;
-        loadCurrentCard()
+        loadCurrentCard();
     }
 
     function loadIncorrect() {
@@ -73,18 +80,20 @@ $(document).ready(function() {
     }
 
     function nextButton(){
-        console.log("next");
+        //alert("next");
         if (cur < studyList.length - 1) {
             cur++;
+            progress = Math.max(cur, progress);
+            document.getElementById('counter').textContent = 'Cards Complete: ' + progress + ' of ' + studyList.length;
             loadCurrentCard();
         } else {
             $("#cardArea").empty();
             $("#cardArea").append('<div id="finalMessage">You have finished the activity.</div>');
+            document.getElementById('counter').textContent = 'Cards Complete: ' + studyList.length + ' of ' + studyList.length;
         }
     }
     
     function prevButton(){
-        console.log("prev");
         if (cur > 0) {
             cur--;
             loadCurrentCard();
@@ -92,7 +101,12 @@ $(document).ready(function() {
     }
 
     function isCorrect(){
+        if(studyList[cur].getCorrect() == false){
+            score++;
+            document.getElementById('score').textContent = ' Score: ' + score;
+        }
         studyList[cur].setCorrect(true);
+
     }
 });
 
