@@ -20,6 +20,12 @@ var currentCard    = createNewCard();
 var currentIndex   = 0;
 var currentButton  = createNewCardButton();
 
+loadInitial();
+
+function loadInitial(){
+    return false;
+}
+
 // Creates a new, blank card and adds it to the current card set
 function createNewCard(){
     var newCard = Object.create(Card);

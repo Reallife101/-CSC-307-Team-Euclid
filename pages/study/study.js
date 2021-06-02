@@ -13,6 +13,7 @@ $(document).ready(function() {
     document.getElementById("prevButton").onclick = prevButton;
     document.getElementById("randomize").onclick = loadRandom;
     document.getElementById("studyIncorrect").onclick = loadIncorrect;
+    document.getElementById("notCorrect").onclick = notCorrect;
     document.getElementById("isCorrect").onclick = isCorrect;
     document.getElementById("reset").onclick = loadInitial;
     document.getElementById("cardArea").onclick = flipCard;
@@ -22,7 +23,8 @@ $(document).ready(function() {
     function loadInitial() {
 
         var curCardJSON = JSON.parse(localStorage.getItem("currentCardSet"));
-
+        currentCardSet.parse(curCardJSON);
+        
         cur = 0;
         if (curCardJSON == null){
             $("#buttonArea").empty();
@@ -32,8 +34,9 @@ $(document).ready(function() {
         }
         else{
             //alert(localStorage.getItem("currentCardSet").length);
-            document.getElementById('setName').textContent = curCardJSON["id"] == null ? "Unnamed Set" : curCardJSON["id"];
-            studyList = curCardJSON["cards"];
+            document.getElementById('setName').textContent = currentCardSet.id == null ? "Unnamed Set" : currentCardSet.id;
+            studyList = currentCardSet.cards;
+            resetScore();
             loadCurrentCard();
         }
     }
@@ -41,8 +44,9 @@ $(document).ready(function() {
 
     
     function loadRandom() {
-        studyList = currentCardSet.shuffleCards();
+        studyList = studyList.sort(() => Math.random() - 0.5)
         cur = 0;
+        resetScore();
         loadCurrentCard();
     }
 
@@ -55,6 +59,7 @@ $(document).ready(function() {
         }
         studyList = incorrectStudyList;
         cur = 0;
+        resetScore();
         loadCurrentCard();
     }
 
@@ -89,7 +94,7 @@ $(document).ready(function() {
             loadCurrentCard();
         } else {
             $("#cardArea").empty();
-            $("#cardArea").append('<div id="finalMessage">You have finished the activity.</div>');
+            $("#cardArea").append('<div id="finalMessage">You have finished the activity! Check your score in the top-right!</div>');
             document.getElementById('counter').textContent = 'Cards Complete: ' + studyList.length + ' of ' + studyList.length;
         }
     }
@@ -101,13 +106,35 @@ $(document).ready(function() {
         }
     }
 
-    function isCorrect(){
-        if(studyList[cur].getCorrect() == false){
-            score++;
-            document.getElementById('score').textContent = ' Score: ' + score;
+    function getScore(){
+        var tempScore = 0;
+        for (var i = 0; i < studyList.length; i++){
+            if (studyList[i].getCorrect()){
+                tempScore++;
+            }
         }
-        studyList[cur].setCorrect(true);
+        score = tempScore;
+        document.getElementById('score').textContent = ' Score: ' + score + "/" + studyList.length;
+    }
 
+    function resetScore(){
+        score = 0;
+        for (var i = 0; i < studyList.length; i++){
+            studyList[i].setCorrect(false);
+        }
+        document.getElementById('score').textContent = ' Score: ' + score + "/" + studyList.length;
+    }
+    function isCorrect(){
+        studyList[cur].setCorrect(true);
+        getScore();
+        nextButton();
+
+    }
+
+    function notCorrect(){
+        studyList[cur].setCorrect(false);
+        getScore();
+        nextButton();
     }
 });
 

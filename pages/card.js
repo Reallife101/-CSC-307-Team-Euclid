@@ -13,7 +13,7 @@ let Card = {
         this.front = jsonObj["front"];
         this.back  = jsonObj["back"];
         return this;
-        }
+    }
 }
 
 let CardSet = {
@@ -77,6 +77,22 @@ let CardSet = {
 
         var dict = {"id": this.id, "class": this.class, "professor": this.professor, "subject": this.subject, "author": this.author, "password": this.password, "cards": tempCards};
         return dict;
+    },
+    parse(cardJSON){
+        this.cards = [];
+        for (var i = 0; i < cardJSON.cards.length; i++){
+            if(cardJSON.cards[i].front != "" && cardJSON.cards[i].front != ""){
+                var newCard = Object.create(Card);
+                newCard = newCard.fromJSON(cardJSON.cards[i]);
+                this.addCard(newCard);
+            }
+        }
+        this.id = cardJSON.id,
+        this.class = cardJSON.class,
+        this.professor = cardJSON.professor,
+        this.subject = cardJSON.subject,
+        this.author = cardJSON.author
+
     }
 }
 
