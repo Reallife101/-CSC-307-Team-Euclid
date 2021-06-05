@@ -1,3 +1,4 @@
+//Card object, contains text for the front and back of card, and correct boolean for testing
 let Card = {
     front : "",
     back :  "",
@@ -16,6 +17,7 @@ let Card = {
     }
 }
 
+//CardSet object, contains a list of cards and functions for manipulating them
 let CardSet = {
     cards :    [],
     id :       null,

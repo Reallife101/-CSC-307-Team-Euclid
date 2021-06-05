@@ -2,14 +2,8 @@ import {Card, CardSet} from "../card.js";
 import { readFromFirebase } from "../database.js";
 
 loadSets();
-/*
-document.getElementById("searchButton").onclick = () => {
-    var getSearchVal = document.getElementById("searchTerm").value;
-    if(getSearchVal != null){
-        search(getSearchVal);
-    }
-}*/
 
+//Based on a card set, creates an entry for browsing
 function createEntry(set){
     console.log(set);
     //Container
@@ -81,6 +75,7 @@ function createEntry(set){
     container.append(newEntry);
 }
 
+//Loads all sets from the database, calls createEntry on all sets
 function loadSets(){
     readFromFirebase("set-names").then(
         (succ) => {

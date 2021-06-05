@@ -21,7 +21,8 @@ var currentButton  = createNewCardButton();
 
 $(document).ready(function() {
     loadInitial();
-
+	
+	// If a CardSet is to be edited, loads this set into the editor
     function loadInitial(){
         var curCardJSON = JSON.parse(localStorage.getItem("currentCardSet"));
             
@@ -48,6 +49,7 @@ $(document).ready(function() {
     }
 })
 
+// Clears all entries in the editor
 function clearAll(){
     for (var i = currentCardSet.cards.length - 1; i > -1; i--){
         currentIndex = i;
